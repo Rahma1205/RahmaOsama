@@ -9,15 +9,14 @@ import { Helmet } from 'react-helmet';
 export default function AllOrders() {
   const [orders, setOrders] = useState(null);
   const encodedToken = localStorage.getItem('userToken');
-  const { id } = encodedToken ? jwtDecode(encodedToken) : {};
+  const { id } =  jwtDecode(encodedToken) ;
 
   async function getUserOrders() {
-    try {
-      const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/orders/user/${id}`);
-     setOrders(data);
-    } catch (error) {
-      toast.error('Failed to fetch orders');
-    }
+   
+      const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/orders/user/${id}`)
+     setOrders(data)
+     console.log(data)
+   
   }
 
   useEffect(() => {
@@ -37,6 +36,7 @@ export default function AllOrders() {
     <Helmet>
       <title>Orders</title>
     </Helmet>
+   <h3>{orders.id}</h3>
       <div className="row">
         {orders.map((order) => (
           <div key={order.id} className={`order border border-gray-300 rounded-md p-4 ${styles.order}`}>

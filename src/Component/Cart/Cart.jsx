@@ -12,7 +12,7 @@ export default function Cart() {
   async function getCart() {
     let response = await getLoggedUserCart();
     if (response.data.status === 'success') {
-    
+  
       setCartDetails(response.data.data);
     }
 
